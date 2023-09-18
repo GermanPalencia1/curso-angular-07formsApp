@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+const rtx5090 = {
+  name:'RTX 5090',
+  price: 2500,
+  inStorage: 6
+}
 
 @Component({
   selector: 'app-basic-page',
@@ -8,7 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   ]
 })
 
-export class BasicPageComponent {
+export class BasicPageComponent implements OnInit{
 
   //Dos formas de hacerlo:
 
@@ -26,11 +32,17 @@ export class BasicPageComponent {
 
   constructor(private fb: FormBuilder) {}
 
+  ngOnInit(): void {
+    this.myForm.reset(rtx5090);
+  }
+
   onSave(): void {
 
     if(this.myForm.invalid) return;
 
     console.log(this.myForm.value);
+
+    this.myForm.reset({price: 0, inStorage: 0});
   }
 
 }
